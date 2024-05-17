@@ -81,8 +81,7 @@ module.exports = function (app) {
         return res.status(400).send({error: 'Puzzle cannot be solved'});
       }
 
-      let stringSolution = "";
-      solution.forEach((row) => {stringSolution += row.join("");});
+      let stringSolution = solver.convertToString(solution);
 
       res.send({solution: stringSolution});
 

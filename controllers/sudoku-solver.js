@@ -101,6 +101,13 @@ class SudokuSolver {
 
   }
 
+  convertToString(matrix) {
+    let stringSolution = "";
+    matrix.forEach((row) => {stringSolution += row.join("");});
+
+    return stringSolution;
+  }
+
   createSparseMatrix(initialMatrix) {
     let clues = [];
 
