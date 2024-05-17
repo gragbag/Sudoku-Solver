@@ -83,7 +83,7 @@ module.exports = function (app) {
 
       let stringSolution = solver.convertToString(solution);
 
-      res.send({solution: stringSolution});
+      res.status(200).send({solution: stringSolution});
 
     });
 };
