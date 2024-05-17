@@ -32,6 +32,9 @@ class SudokuSolver {
     let startingRow = rowNum * 9;
 
     for (let i = startingRow; i < startingRow + 9; i++) {
+      if (i - startingRow == column - 1) {
+        continue;
+      }
       if (puzzleString.charAt(i) == value) {
         return false;
       }
@@ -41,7 +44,12 @@ class SudokuSolver {
   }
 
   checkColPlacement(puzzleString, row, column, value) {
+    let rowNum = row.charCodeAt(0) - 'A'.charCodeAt(0);
+
     for (let i = column - 1; i < 81; i += 9) {
+      if (Math.floor(i / 9) == rowNum) {
+        continue;
+      }
       if (puzzleString.charAt(i) == value) {
         return false;
       }
@@ -56,12 +64,23 @@ class SudokuSolver {
 
     let block = Math.floor(colNum / 3) + (Math.floor(rowNum / 3) * 3);
 
-    let startingPos = block * 9;
+    let topRow = Math.floor(block / 3) * 3 * 9;
+    let leftCol = (block % 3) * 3
+
+    let startingPos = topRow + leftCol;
     let endingPos = startingPos + 20;
+
+    let rowDisplacement = rowNum % 3;
+    let colDisplacement = colNum % 3;
 
     for (let i = startingPos; i < endingPos; i += 9) {
       for (let j = 0; j < 3; j++) {
         let location = i + j;
+
+        if (location == startingPos + (rowDisplacement * 9) + colDisplacement) {
+          continue;
+        }
+
         if (puzzleString.charAt(location) == value) {
           return false;
         }
